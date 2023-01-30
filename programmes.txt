@@ -1,0 +1,239 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int least_not_possible_sum(vector <long int> vec, int size){
+    vector <long int> vect;
+    int sum = 0;
+    for (int i = 0; i < size; i++){
+        sum = vec[i];
+        for (int j = 0; j < size; j++){
+            vect.push_back(sum);
+            sum += vec[j];
+        }
+    }
+    vect.push_back(sum);
+    sort(vect.begin(), vect.end());
+    for (int i = vect[0]; i < vect[vect.size()-1]; i++){
+        if (find(vect.begin(), vect.end(), i) == vect.end()){
+            return i;
+        }
+    }
+    return vect[vect.size()-1];
+}
+
+int main(){
+    vector <long int> array = {1, 2, 3};
+    cout << least_not_possible_sum(array, array.size()) << endl;
+    return 0;
+}
+
+
+_________________________________________________________________________________________________
+_________________________________________________________________________________________________
+
+***************** (QUESTIONS SECTION) THAT I NEED TO SOLVE IN NEAR FUTURE ******************* 
+
+Question) n = 10 , m = 4
+S[] ={2,5,3,6}
+Output: 5
+Explanation: Five Possible ways are:
+{2,2,2,2,2}, {2,2,3,3}, {2,2,6}, {2,3,5} 
+and {5,5}.
+
+Question) N = 8, M = 5
+A = {3, 4, 1, 9, 56, 7, 9, 12}
+Output: 6
+Explanation: The minimum difference between 
+maximum chocolates and minimum chocolates 
+is 9 - 3 = 6 by choosing following M packets :
+{3, 4, 9, 7, 9}.
+
+Question) N = 6
+array[] = {1, 10, 3, 11, 6, 15}
+Output: 
+2
+Explanation:
+2 is the smallest integer value that cannot 
+be represented as sum of elements from the array.
+
+Question) Input:
+r = 4, c = 4f
+matrix[][] = {{1, 2, 3, 4},
+           {5, 6, 7, 8},
+           {9, 10, 11, 12},
+           {13, 14, 15,16}}
+Output: 
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+
+Question) TO find the longest common sequence in N strings
+int main(){
+   cout << LCSof3("geeks", "geeksforGeeks", "geeksfor", 5, 13, 8) << endl; // geeks
+   return 0;
+}
+
+Question) Input: ideas = ["coffee","donuts","time","toffee"]
+Output: 6
+Explanation: The following selections are valid:
+- ("coffee", "donuts"): The company name created is "doffee conuts".
+- ("donuts", "coffee"): The company name created is "conuts doffee".
+- ("donuts", "time"): The company name created is "tonuts dime".
+- ("donuts", "toffee"): The company name created is "tonuts doffee".
+- ("time", "donuts"): The company name created is "dime tonuts".
+- ("toffee", "donuts"): The company name created is "doffee tonuts".
+Therefore, there are a total of 6 distinct company names.
+
+The following are some examples of invalid selections:
+- ("coffee", "time"): The name "toffee" formed after swapping already exists in the original array.
+- ("time", "toffee"): Both names are still the same after swapping and exist in the original array.
+- ("coffee", "toffee"): Both names formed after swapping already exist in the original array.
+-------------------------------------------------------------------
+___________________________________________________________________
+
+*************** CONCEPTS I LEARNED FROM DEREK BANAS ******************
+
+string sMiles;  ======> way to convert string to int, float, or double
+    cout << "Enter the miles: ";
+    cin >> sMiles;
+    float miles = stof(sMiles);
+    printf("%.1f miles is equal to %.2f %s\n",miles, miles*1.6,"kilometers");
+
+
+
+vector <string> words;  =====> way to make string a array of words
+string info = "This is the info page of our website";
+stringstream ss(info);
+string individual;
+char space = ' ';
+while (getline(ss, individual, space)){
+    words.push_back(individual);
+}
+    
+for (string x: words){
+    cout << x << endl;
+}
+
+
+iota(begin(vec), end(vec), 0); =====> this guy gonna fill the value from 0 to sizeof(vec) in vec 
+
+
+void assingName(string *name){ ======> to change the value of a variable by using a function
+   *name = "Name has been changed"; 
+}
+
+int main(){
+    string name = "Gonna change soon";
+    assingName(&name);
+    cout << name;
+    return 0;
+}
+
+
+vector <int> Range(int start, int last, int gap){ =====> making a range function of our own 
+    int i = start;
+    vector <int> range;
+    while (i <= last){range.push_back(i); i += gap;}
+    return range;
+} ======> if we are returning a vector then we have to store this function inside a vector data type
+
+
+int main(){   ========> programme to make a pine tree by using our Range function
+    int height, hash = 1;
+    cin >> height;
+    int space = height - 1;
+    while (height != 0){
+        for (auto x : Range(1, space, 1)) cout << " ";
+        for (auto x : Range(1, hash, 1)) cout << "#";
+        cout << endl;
+        space -= 1; height -= 1; hash += 2;
+    }
+}
+
+
+int num = 0, num2 = 0; ========> how to use exception or try and catch in C++
+cin >> num >> num2;
+
+try {
+    if (num2 == 0) throw "Division by zero is not possible";
+    else printf("%d / %d = %d\n", num, num2, num/num2);
+}
+catch(const char* ex){
+    cout << "Error: " << ex << endl;
+}
+
+
+try {    ===========> another way to approach for exception solving in C++
+    cout << "Gonna handle exception soon" << endl;
+    throw runtime_error("Error solved");
+    cout << "This is not gonna print bcz this is after throw method";
+}
+catch(exception &ep){cout << "exception handled: " << ep.what()<< endl;}
+catch (...){  ------> this guy here can deal with all kind of exceptions  
+    cout << "Default exception in C++" << endl;
+}
+
+
+string str = "This is a kinda string here", secret_code; =======> how to store ascii number of chars of one string into another
+for (auto x : str){
+    secret_code += to_string(int(x));
+}
+cout << secret_code << endl;
+
+
+string str("I am new string value demonstrated here"); ===========> string functions that I didn't know before
+cout << str.front() << " " << str.back() << endl; // gives the first and last character in a string
+string copyfromRange(str, 3); // copy from 3 index to end
+string strnew(4, 'x'); // copy a char x times inside the string
+strnew.append(" to the community"); // gonna add text to the end 
+cout << "Substring: " << str.substr(5, 12); // to get substring out of a string
+transform(str.begin(), str.end(), str.begin(),::toupper); // to convert all the letters to upper case in a string
+
+
+int cube(int n){  =========> how to give function as a parameter inside a function
+    return pow(n, 3);
+}
+
+int doMath(function <int(int)> func, int num){
+    return func(num);
+}
+
+int main(){
+    cout << doMath(cube, 5);
+    vector <function <double(double)>> funcs(2); ========> that's how we give function as a arguement insie a vector
+    funcs[0] = cube;
+    cout << funcs[0](10) << endl;
+    return 0;
+}
+
+
+cout.setf(ios::boolalpha); ===========> way to convert bool value to alphabetical value
+
+
+vector <int> vect{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; =============> how to use copy_if and for_each method in C++
+int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+int divisor = 3;
+vector <int> vect2; // will copy the elements which is divisible by 2
+copy_if(vect.begin(), vect.end(), back_inserter(vect2), [divisor](int x){return x % 3 == 0;});
+for_each(arr, arr+10, [&](int x){divisor += x;});
+
+
+#define PI 3.14   ====----======-----======> how to use macro datas in C++
+#define AREA_CIRCLE(radius)(PI*(pow(radius, 2)))
+
+template<typename T, typename U> int className<T, U> :: numberOfPeople; ==========> this is how we use static data type in a templated class
+
+
+vector <int> vect = {1, 2, 3, 4, 5, 6};  ===========> some operation we can do with the help of iterators on STL containers
+vector <int> :: iterator iter = vect.begin();
+// advance used to move advance some steps in container
+advance(iter, 2);
+cout << *iter << endl;
+// next and previous also use to move ahead and back but it returns a iterator
+auto itr1 = next(iter, 2);
+cout << *itr1 << endl;
+auto itr2 = prev(iter, 1);
+cout << *itr2 << endl;
+// using inserting by the help of iterator to insert at right places
+vector <int> vec1 = {1, 4, 5, 6};
+vector <int> vec2 = {2, 3};
+auto itr3 = vec1.begin()+1;
+copy(vec2.begin(), vec2.end(), inserter(vec1, itr3));
